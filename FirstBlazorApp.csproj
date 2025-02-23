@@ -6,4 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="D:\workspace\CsharpProjects\BlazorApps\FirstBlazorApp\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="D:\workspace\CsharpProjects\BlazorApps\FirstBlazorApp\.editorconfig" />
+  </ItemGroup>
+
 </Project>

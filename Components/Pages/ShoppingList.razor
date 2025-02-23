@@ -3,6 +3,7 @@
 @rendermode InteractiveServer
 
 <h3>ShoppingList</h3>
+<PageTitle>@title</PageTitle>
 
 <input name="groceryName" placeholder="Grocery Name" @bind="groceryName" />
 <input name="groceryPrice" placeholder="Grocery Price" @bind="groceryPrice" />
@@ -16,13 +17,14 @@
     }
 </ul>
 
-<h1> Grocery Total (@groceries.Sum(Grocery => Grocery.Price))</h1>
+<h1> Grocery Total (@sum)</h1>
 
 
 @code {
-
+    private string title = "Shopping List";
     private string? groceryName;
     private decimal groceryPrice;
+    private decimal sum = 0;
 
     private List<Grocery> groceries = new();
 
@@ -35,6 +37,7 @@
                 { Name = groceryName,
                   Price = groceryPrice 
                 });
+            sum += groceryPrice;
             groceryName = string.Empty;
             groceryPrice = 0;
 

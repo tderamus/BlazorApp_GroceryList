@@ -1,0 +1,37 @@
+﻿@page "/converter"
+@rendermode InteractiveServer
+
+<h3>Converter</h3>
+
+<label>KG </label>
+<input type="number" @bind-value="@Kilos" @bind-value:event="oninput" />
+<span> = </span>
+<input type="number" @bind-value="@Grams" @bind-value:event="oninput" />
+<label> G</label>
+
+
+@code {
+    private double kilos = 1;
+    private double grams = 1000;
+
+    public double Kilos
+    {
+        get => kilos;
+        set
+        {
+            kilos = value;
+            grams = kilos * 1000;
+        }
+    }
+
+    public double Grams
+    {
+        get => grams;
+        set
+        {
+            grams = value;
+            kilos = grams / 1000;
+        }
+    }
+
+}
