@@ -1,0 +1,32 @@
+﻿@inherits LayoutComponentBase
+@namespace FirstBlazorApp.Components.Layout
+
+<h3>ShoppingListLayout</h3>
+
+<header>
+    <h1>Our List
+
+    </h1>
+</header>
+
+<nav>
+    <a href="/">Home</a>"
+    <a href="counter">Counter</a>
+    <a href="/converter">Converter</a>
+</nav>
+
+<div>
+    <a>@today.ToString("dddd, dd MMMM yyyy")</a>
+</div>
+
+@Body
+
+<footer>
+    @footerMessage
+</footer>
+
+@code {
+    public string footerMessage = "Thank you for visiting our site!";
+
+    DateTime today = DateTime.Today;
+}
