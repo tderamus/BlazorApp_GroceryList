@@ -9,13 +9,21 @@
 <input name="groceryPrice" placeholder="Grocery Price" @bind="groceryPrice" />
 <button class="btn btn-primary" @onclick="AddGrocery">Add Grocery Item</button>
 
-
-<ul>
-    @foreach (var grocery in groceries)
-    {
-        <li>@grocery.Name -- @grocery.Price</li>
-    }
-</ul>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var grocery in groceries)
+        {
+            <Item GroceryItem="@grocery" OnGroceryPriceIncreased="OnGroceryPriceIncreased" />
+        }
+    </tbody>
+</table>
 
 <h1> Grocery Total (@sum)</h1>
 
@@ -37,14 +45,26 @@
                 { Name = groceryName,
                   Price = groceryPrice 
                 });
-            sum += groceryPrice;
             groceryName = string.Empty;
             groceryPrice = 0;
 
         }
+        
         else
         {
             Console.WriteLine("Invalid input: Name or Price is incorrect.");
         }
+
+        UpdateTotal();
+    }
+
+    public void UpdateTotal()
+    {
+        sum = groceries.Sum(g => g.Price);
+    }
+
+    private void OnGroceryPriceIncreased(MouseEventArgs e)
+    {
+        UpdateTotal();
     }
 }
