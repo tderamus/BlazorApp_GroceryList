@@ -1,0 +1,47 @@
+﻿@using FirstBlazorApp.Data;
+@page "/shoppinglist"
+@rendermode InteractiveServer
+
+<h3>ShoppingList</h3>
+
+<input name="groceryName" placeholder="Grocery Name" @bind="groceryName" />
+<input name="groceryPrice" placeholder="Grocery Price" @bind="groceryPrice" />
+<button class="btn btn-primary" @onclick="AddGrocery">Add Grocery Item</button>
+
+
+<ul>
+    @foreach (var grocery in groceries)
+    {
+        <li>@grocery.Name -- @grocery.Price</li>
+    }
+</ul>
+
+<h1> Grocery Total (@groceries.Sum(Grocery => Grocery.Price))</h1>
+
+
+@code {
+
+    private string? groceryName;
+    private decimal groceryPrice;
+
+    private List<Grocery> groceries = new();
+
+
+    private void AddGrocery()
+    {
+       if (!string.IsNullOrWhiteSpace(groceryName) && groceryPrice > 0)
+        {
+            groceries.Add(new Grocery 
+                { Name = groceryName,
+                  Price = groceryPrice 
+                });
+            groceryName = string.Empty;
+            groceryPrice = 0;
+
+        }
+        else
+        {
+            Console.WriteLine("Invalid input: Name or Price is incorrect.");
+        }
+    }
+}
